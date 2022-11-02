@@ -8,6 +8,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include "utils.h"
 
 #define N 120
 
@@ -112,15 +113,6 @@ void shell_sort(int *a, int n) {
     }
 }
 
-//取整数M的第i位数
-int GetDigit(int M, int i) {
-    while(i > 1)
-    {
-        M /= 10;
-        i--;
-    }
-    return M % 10;
-}
 
 #define  D 5        // 最大位数
 // 基数排序
@@ -136,11 +128,10 @@ void radix_sort(int *a, int n) {
         // 将每个数据的第i位数分配到allot数组中
         for (j = 0; j < n; j++) {
             // 获取当前数据 num[j] 的 第i位数
-            digit = GetDigit(a[j], i);
+            digit = get_digit(a[j], i);
             k = 0;
             // 查找插入的位置
-            while (allot[digit][k])
-            {
+            while (allot[digit][k]) {
                 k++;
             }
             // 将num[j]添加到分配数组allot的第digit行的末尾
@@ -148,12 +139,10 @@ void radix_sort(int *a, int n) {
         }
         // 将分配数组的数据收集到原数组中
         l = 0;
-        for (j = 0; j < 10; j++)
-        {
+        for (j = 0; j < 10; j++) {
             k = 0;
             // 获取数组allot的每一行的数据 到 原数组中
-            while (allot[j][k])
-            {
+            while (allot[j][k]) {
                 a[l++] = allot[j][k++];
             }
         }
@@ -174,7 +163,7 @@ void printList(int *a, int n) {
     }
 }
 
-
+/*
 int main(int argc, const char * argv[]) {
     // insert code here...
     printf("Hello, World!\n");
@@ -191,3 +180,4 @@ int main(int argc, const char * argv[]) {
     
     return 0;
 }
+*/
