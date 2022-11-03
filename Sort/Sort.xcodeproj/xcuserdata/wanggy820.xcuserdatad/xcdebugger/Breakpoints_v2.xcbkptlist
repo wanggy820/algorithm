@@ -16,7 +16,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "62"
             endingLineNumber = "62"
-            landmarkName = "main(argc, argv)"
+            landmarkName = "big_number_merge_sort(a, left, right)"
             landmarkType = "9">
          </BreakpointContent>
       </BreakpointProxy>

@@ -24,6 +24,7 @@ void print_list(int *a, int n);
 char** input_big_number_list(int n);
 void print_big_number_list(char **a, int n);
 
+int get_big_num_digit(char *M, int i);
 char* calculate(char *s1, char *s2);
-
+int MAX(int a, int b);
 #endif /* utils_h */

@@ -115,8 +115,8 @@ char ** input_big_number_list(int n) {
     char **a = malloc(sizeof(char *)*n);
     for (int i = 0; i < n; i++) {
         *(a+i) = malloc(sizeof (char)*size);
-        int rand1 = arc4random()%101;
-        int rand2 = arc4random()%101;
+        int rand1 = arc4random();
+        int rand2 = arc4random();
         if (rand2 < 0) {
             rand2 = -rand2;
         }
@@ -124,7 +124,7 @@ char ** input_big_number_list(int n) {
         itoa(rand1, s1, 10);
         char s2[size] = {};
         itoa(rand2, s2, 10);
-//        strcat(s1, s2);
+        strcat(s1, s2);
         strcpy(a[i], s1);
     }
     return a;
@@ -214,4 +214,22 @@ char* calculate(char *s1, char *s2) {
     }
     
     return str;
+}
+
+int MAX(int a, int b) {
+    if (a > b) {
+        return a;
+    }
+    return b;
+}
+
+int get_big_num_digit(char *M, int i) {
+    int len = (int)strlen(M);
+    if (i > len) {
+        return 0;
+    }
+    if (len == i && M[0] == '-') {
+        return 0;
+    }
+    return M[len - i] - '0';
 }
