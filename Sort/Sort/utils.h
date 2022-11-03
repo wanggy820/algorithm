@@ -10,8 +10,20 @@
 
 #include <stdio.h>
 
+struct BigNumber {
+    char *value;
+    char *virtualV;
+};
+
 int get_digit(int M, int i);
-char* itoa(long num,char* str,int radix);
-int compare(char *a, char *b);
+int string2num_compare(char *a, char *b);
+
+void input_list(int *a, int n);
+void print_list(int *a, int n);
+
+char** input_big_number_list(int n);
+void print_big_number_list(char **a, int n);
+
+char* calculate(char *s1, char *s2);
 
 #endif /* utils_h */

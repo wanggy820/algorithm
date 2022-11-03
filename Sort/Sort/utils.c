@@ -7,10 +7,14 @@
 
 #include "utils.h"
 #include <string.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <math.h>
 
 
 //取整数M的第i位数
 int get_digit(int M, int i) {
+    M = abs(M);
     while(i > 1) {
         M /= 10;
         i--;
@@ -58,26 +62,156 @@ char* itoa(long num,char* str,int radix)
     return str;//返回转换后的字符串
 }
 
-//假设a,b非空并能转为正整数，
-int compare(char *a, char *b) {
+//假设a,b非空并能转为整数，
+int string2num_compare(char *a, char *b) {
+    char firstA = a[0];
+    char firstB = b[0];
+    int signA = firstA == '-' ? -1 : 1;
+    int signB = firstB == '-' ? -1 : 1;
+    if (signA > 0 && signB < 0) {
+        return 1;
+    }
+    if (signA < 0 && signB > 0) {
+        return -1;
+    }
+    
     size_t aL = strlen(a);
     size_t bL = strlen(b);
     if (aL > bL) {
-        return 1;
+        return signA;
     }
     if (aL < bL) {
-        return -1;
+        return -signA;
     }
     int i = 0;
     while (i < aL) {
         i++;
         if (a[i-1] > b[i-1]) {
-            return 1;
+            return signA;
         }
         if (a[i-1] < b[i-1]) {
             i++;
-            return -1;
+            return -signA;
         }
     }
     return 0;
+}
+
+void input_list(int *a, int n) {
+    for (int i = 0; i < n; i++) {
+        int rand = arc4random();
+        a[i] = rand/101;//需要保证数据不溢出
+    }
+}
+
+void print_list(int *a, int n) {
+    for (int i = 0; i < n; i++) {
+        printf("a[%3d] = %10d\n", i , a[i]);
+    }
+}
+
+#define size 1000
+char ** input_big_number_list(int n) {
+    char **a = malloc(sizeof(char *)*n);
+    for (int i = 0; i < n; i++) {
+        *(a+i) = malloc(sizeof (char)*size);
+        int rand1 = arc4random()%101;
+        int rand2 = arc4random()%101;
+        if (rand2 < 0) {
+            rand2 = -rand2;
+        }
+        char s1[size] = {};
+        itoa(rand1, s1, 10);
+        char s2[size] = {};
+        itoa(rand2, s2, 10);
+//        strcat(s1, s2);
+        strcpy(a[i], s1);
+    }
+    return a;
+}
+
+void print_big_number_list(char **a, int n) {
+    for (int i = 0; i < n; i++) {
+        printf("a[%3d] = %40s\n", i , a[i]);
+    }
+}
+
+char *add(char *s1, char *s2) {
+    int len1 = (int)strlen(s1);
+    int len2 = (int)strlen(s2);
+    int len = len1;
+    if (len < len2) {
+        len = len2;
+    }
+    char *str = malloc(sizeof(char) *(len+1));
+    int index = 0;
+    int flag = 0;
+    while (index < len1 && index < len2) {
+        char c1 = s1[len1 - index - 1];
+        char c2 = s2[len2 - index - 1];
+        int num = c1 - '0' + c2 - '0' + flag;
+        if (num >= 10){
+            flag = 1;
+            num %= 10;
+        } else {
+            flag = 0;
+        }
+        str[index] = num + '0';
+        index++;
+    }
+    while (index < len1) {
+        char c1 = s1[len1 - index - 1];
+        int num = c1 - '0' + flag;
+        if (num >= 10){
+            flag = 1;
+            num /= 10;
+        } else {
+            flag = 0;
+        }
+        str[index] = num + '0';
+        index++;
+    }
+    
+    while (index < len2) {
+        char c2 = s2[len2 - index - 1];
+        int num = c2 - '0' + flag;
+        if (num >= 10){
+            flag = 1;
+            num /= 10;
+        } else {
+            flag = 0;
+        }
+        str[index] = num + '0';
+        index++;
+    }
+    if (flag) {
+        str[index++] = '1';
+    }
+    char tmp;
+    for (int i = 0; i < index/2; i++) {
+        tmp = str[i];
+        str[i] = str[index - i - 1];
+        str[index - i - 1] = tmp;
+    }
+    str[index] = '\0';
+    return str;
+}
+
+char* calculate(char *s1, char *s2) {
+    int len1 = (int)strlen(s1);
+    int len2 = (int)strlen(s2);
+    
+    int len = len1;
+    if (len < len2) {
+        len = len2;
+    }
+
+    char *str = malloc(sizeof(char) *(len+2));
+    int index = len - 1;
+    while (index >= 0) {
+        
+        index--;
+    }
+    
+    return str;
 }
