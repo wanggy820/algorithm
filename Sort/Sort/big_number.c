@@ -143,7 +143,7 @@ void _big_number_radix_sort(char **num, int n, int isLessZero) {
     
     int i, j, k, l, digit;
     char *allot[10][N];   // 分配数组
-    // 初始化分配数组全为0
+    // 初始化分配数组全为空
     big_num_clear(allot);
     // 遍历
     for (i = 1; i <= maxDigit; i++) {
@@ -216,18 +216,12 @@ int main(int argc, const char * argv[]) {
     
     int n = N;
     char **a = input_big_number_list(n);
-//    a[0] = "-58";
-//    a[1] = "-112";
-//    a[2] = "-61";
-//    a[3] = "-60";
-//    a[4] = "-97";
-//    a[5] = "-39";
+
 //    big_number_select_sort(a, n);
 //    big_number_merge_sort(a, 0, n-1);
 //    big_number_quick_sort(a, 0, n-1);
 //    big_number_shell_sort(a, n);
-    print_big_number_list(a, n);
-    printf("\n\n");
+
     big_number_radix_sort(a, n);
     
     
