@@ -1,25 +1,25 @@
 //
-//  utils.c
+//  utils.cpp
 //  Sort
 //
-//  Created by wanggy820 on 2022/11/2.
+//  Created by wanggy820 on 2022/11/7.
 //
 
 #include "utils.h"
-#include <string.h>
-#include <stdio.h>
-#include <stdlib.h>
 #include <math.h>
+#include <string.h>
+#include <iostream>
+#include <iomanip>
 
-
+using namespace std;
 //取整数M的第i位数
-int get_digit(int M, int i) {
-    M = abs(M);
+int get_digit(int m, int i) {
+    m = abs(m);
     while(i > 1) {
-        M /= 10;
+        m /= 10;
         i--;
     }
-    return M % 10;
+    return m % 10;
 }
 
 
@@ -97,24 +97,25 @@ int string2num_compare(char *a, char *b) {
     return 0;
 }
 
-void input_list(int *a, int n) {
-    for (int i = 0; i < n; i++) {
+void input_list(int *arr, int len) {
+    for (int i = 0; i < len; i++) {
         int rand = arc4random();
-        a[i] = rand/101;//需要保证数据不溢出
+        arr[i] = rand/101;//需要保证数据不溢出
     }
 }
 
-void print_list(int *a, int n) {
-    for (int i = 0; i < n; i++) {
-        printf("a[%3d] = %10d\n", i , a[i]);
+void print_list(int *arr, int len) {
+    for (int i = 0; i < len; i++) {
+//        printf("arr[%3d] = %10d\n", i , arr[i]);
+        cout << "arr[" << setw(3) << i << "] == " << setw(10) << arr[i] << endl;
     }
 }
 
 #define size 1000
-char ** input_big_number_list(int n) {
-    char **a = malloc(sizeof(char *)*n);
-    for (int i = 0; i < n; i++) {
-        *(a+i) = malloc(sizeof (char)*size);
+char ** input_big_number_list(int len) {
+    char **arr = (char **)malloc(sizeof(char *)*len);
+    for (int i = 0; i < len; i++) {
+        *(arr+i) = (char *)malloc(sizeof (char)*size);
         int rand1 = arc4random();
         int rand2 = arc4random();
         if (rand2 < 0) {
@@ -125,14 +126,15 @@ char ** input_big_number_list(int n) {
         char s2[size] = {};
         itoa(rand2, s2, 10);
         strcat(s1, s2);
-        strcpy(a[i], s1);
+        strcpy(arr[i], s1);
     }
-    return a;
+    return arr;
 }
 
-void print_big_number_list(char **a, int n) {
-    for (int i = 0; i < n; i++) {
-        printf("a[%3d] = %40s\n", i , a[i]);
+void print_big_number_list(char **arr, int len) {
+    for (int i = 0; i < len; i++) {
+//        printf("arr[%3d] = %40s\n", i , arr[i]);
+        cout << "arr[" << setw(3) << i << "] == " << setw(30) << arr[i] << endl;
     }
 }
 
@@ -143,13 +145,13 @@ int MAX(int a, int b) {
     return b;
 }
 
-int get_big_num_digit(char *M, int i) {
-    int len = (int)strlen(M);
+int get_big_num_digit(char *num, int i) {
+    int len = (int)strlen(num);
     if (i > len) {
         return 0;
     }
-    if (len == i && M[0] == '-') {
+    if (len == i && num[0] == '-') {
         return 0;
     }
-    return M[len - i] - '0';
+    return num[len - i] - '0';
 }
