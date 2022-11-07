@@ -10,18 +10,18 @@
 #include <iostream>
 
 void big_number_select_sort(char **arr, int len) {
-    int minIndex;
+    int min_index;
     char *tmp;
     for (int i = 0; i < len; i++) {
-        minIndex = i;
+        min_index = i;
         for (int j = i+1; j < len; j++) {
-            if (string2num_compare(arr[minIndex], arr[j]) > 0) {
-                minIndex = j;
+            if (string2num_compare(arr[min_index], arr[j]) > 0) {
+                min_index = j;
             }
         }
-        if (minIndex != i) {
-            tmp = arr[minIndex];
-            arr[minIndex] = arr[i];
+        if (min_index != i) {
+            tmp = arr[min_index];
+            arr[min_index] = arr[i];
             arr[i] = tmp;
         }
     }

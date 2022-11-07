@@ -18,17 +18,17 @@
  选择排序不稳定，但是效率与冒泡排序相比，有明显提高
  */
 void select_sort(int *arr, int len) {
-    int minIndex, tmp;
+    int min_index, tmp;
     for (int i = 0; i < len; i++) {
-        minIndex = i;
+        min_index = i;
         for (int j = i+1; j < len; j++) {
-            if (arr[minIndex] > arr[j]) {
-                minIndex = j;
+            if (arr[min_index] > arr[j]) {
+                min_index = j;
             }
         }
-        if (minIndex != i) {
-            tmp = arr[minIndex];
-            arr[minIndex] = arr[i];
+        if (min_index != i) {
+            tmp = arr[min_index];
+            arr[min_index] = arr[i];
             arr[i] = tmp;
         }
     }
