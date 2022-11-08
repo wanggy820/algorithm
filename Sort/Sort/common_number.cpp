@@ -70,11 +70,11 @@ void merge_sort(int *arr, int len) {
 }
 
 int partition(int *arr, int left, int right) {
-    int x = arr[right];
+    int pivot = arr[right];
     int i = left - 1;
     int tmp;
     for (int j = left; j < right; j++) {
-        if (arr[j] < x) {
+        if (arr[j] < pivot) {
             i++;
             tmp = arr[j];
             arr[j] = arr[i];
