@@ -38,6 +38,6 @@ void big_number_radix_sort(char **arr, int len);
 // 分布式选择排序
 void distributed_sort(int nums[], int len, _Fp&& __f)
 ```
-其中参数 __f 可以传common_number.cpp中实现的排序方法名
+其中参数 __f 可以传common_number.cpp中实现的排序方法名,方法中
 把nums分割成10组数据，放到子线程中，分别排序，排序完成后回到主线程，把所有数据归并到原数组中，从而完成排序
 
